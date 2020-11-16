@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -23,24 +24,29 @@ const Import: React.FC = () => {
   const history = useHistory();
 
   async function handleUpload(): Promise<void> {
-    // const data = new FormData();
-
-    // TODO
-
     try {
-      // await api.post('/transactions/import', data);
+      for await (const uploadedFile of uploadedFiles) {
+        const data = new FormData();
+        data.append('file', uploadedFile.file);
+        await api.post('/transactions/import', data);
+      }
     } catch (err) {
-      // console.log(err.response.error);
+      console.log(err.response.error);
     }
   }
 
   function submitFile(files: File[]): void {
-    // TODO
+    const submitUploadedFiles = files.map(file => {
+      const { name, size } = file;
+      const readableSize = filesize(size);
+      return { file, name, readableSize };
+    });
+    setUploadedFiles(submitUploadedFiles);
   }
 
   return (
     <>
-      <Header size="small" />
+      <Header size="small" selected="/import" />
       <Container>
         <Title>Importar uma transação</Title>
         <ImportFileContainer>

@@ -9,6 +9,9 @@ export const Container = styled.div`
   max-width: 1120px;
   margin: 0 auto;
   padding: 40px 20px;
+  @media (max-width: 1000px) {
+    padding: 10px 10px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -17,17 +20,31 @@ export const Title = styled.h1`
 `;
 
 export const CardContainer = styled.section`
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 32px;
   margin-top: -150px;
+  justify-content: space-between;
+
+  @media (max-width: 1000px) {
+    /* flex-direction: column; */
+    margin-top: 0px;
+    grid-gap: 10px;
+  }
 `;
 
-export const Card = styled.div`
+export const StyledCard = styled.div`
   background: ${({ total }: CardProps): string => (total ? '#FF872C' : '#fff')};
   padding: 22px 32px;
   border-radius: 5px;
   color: ${({ total }: CardProps): string => (total ? '#fff' : '#363F5F')};
+  min-width: 300px;
+  @media (max-width: 1000px) {
+    width: 100%;
+    min-width: 100px;
+    padding: 10px 10px;
+    justify-content: center;
+  }
 
   header {
     display: flex;
@@ -35,7 +52,13 @@ export const Card = styled.div`
     justify-content: space-between;
 
     p {
-      font-size: 16px;
+      font-size: 14px;
+    }
+    img {
+      @media (max-width: 1000px) {
+        width: 15px;
+        height: 15px;
+      }
     }
   }
 
@@ -44,12 +67,20 @@ export const Card = styled.div`
     font-size: 36px;
     font-weight: normal;
     line-height: 54px;
+    @media (max-width: 1000px) {
+      margin-top: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      line-height: 15px;
+    }
   }
 `;
 
 export const TableContainer = styled.section`
   margin-top: 64px;
-
+  @media (max-width: 1000px) {
+    margin-top: 0px;
+  }
   table {
     width: 100%;
     border-spacing: 0 8px;
@@ -61,6 +92,13 @@ export const TableContainer = styled.section`
       text-align: left;
       font-size: 16px;
       line-height: 24px;
+      @media (max-width: 1000px) {
+        &:first-child {
+          padding-left: 15px;
+        }
+        padding: 5px 0px;
+        font-size: 10px;
+      }
     }
 
     td {
@@ -70,6 +108,15 @@ export const TableContainer = styled.section`
       font-size: 16px;
       font-weight: normal;
       color: #969cb3;
+
+      @media (max-width: 1000px) {
+        &:first-child {
+          padding-left: 15px;
+        }
+        padding: 5px 0px;
+        font-size: 10px;
+        line-height: 30px;
+      }
 
       &.title {
         color: #363f5f;
