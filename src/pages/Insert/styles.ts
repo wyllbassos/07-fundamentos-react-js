@@ -57,3 +57,4 @@ export const Form = styled.form`
     }
   }
 `;
+export const ListError = styled.ul``;
